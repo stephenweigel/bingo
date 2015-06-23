@@ -1,0 +1,17 @@
+/* Scoreboard Styles */
+
+#bingoScoreboard {
+  background-color: black;
+  color: white;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.letterCell {
+	background-color: green;
+}
+
+#currentNumber {
+	font-size: 2em;
+	font-weight: bold;
+}
