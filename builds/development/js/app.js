@@ -206,11 +206,33 @@ appControllers.controller('CardsController', ['$scope', function($scope){
 				cardNumbers.N[2] = "Free";
 				return cardNumbers;
 			};
+
+			this.generateBingoCardTables = function(num) {
+				var numberOfTables = num;
+				var cards = [];
+				var tableHTML;
+				for ( var i = 0 ; i < numberOfTables; i++ ) {
+					tableHTML  = "<div class='col-md-4'>";
+					tableHTML += "<table class='table text-center'";
+					tableHTML += "id='bingoCard" + i + "'>";
+					tableHTML += "<tr>";
+					tableHTML += "<th class='text-center'>B</th><th class='text-center'>I</th>";
+					tableHTML += "<th class='text-center'>N</th>";
+					tableHTML += "<th class='text-center'>G</th><th class='text-center'>O</th>";
+					tableHTML += "</tr></table>";
+					tableHTML += "</div>";
+					cards.push(tableHTML);
+				}
+				for ( var i = 0; i < cards.length; i++ ) {
+					$('#bingoCards').append(cards[i]);
+				}
+
+				
+			};
 			
 
 			this.generateBingoCard = function(divID) {
 				var numbers = this.generateBingoCardNumbers();
-				console.log(numbers);
 				var generatedHTML;
 				for ( var i = 0; i < 5; i++ ) {
 					generatedHTML += "<tr>";
@@ -227,7 +249,8 @@ appControllers.controller('CardsController', ['$scope', function($scope){
 		} // BingoCard
 
 			var cards = new BingoCard();
-			for ( var cardNum = 1; cardNum < 4; cardNum++ ) {
+			cards.generateBingoCardTables(3);
+			for ( var cardNum = 0; cardNum < 3; cardNum++ ) {
 				cards.generateBingoCard('#bingoCard' + cardNum);
 			};
 	}); // document.ready
