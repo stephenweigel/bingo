@@ -92,67 +92,53 @@ appControllers.controller('BingoController', ['$scope', function($scope){
 	    			return $(this).text() == num;
 				});
 				$(cell).css("background-color","green");
-			}
+			};
+
+			this.runGame = function() {
+				console.log("gameInterval started");
+				this.gameInterval = setInterval(function () {
+			        if (newGame.usedNumbers.length > 0 ) {
+						newGame.highlightNumber(newGame.currentNumber);
+					}
+					var currentNumber = newGame.getNextNumber();
+					$('#currentNumber').text(currentNumber);
+					newGame.currentNumber = currentNumber;
+			    },5000);
+			};
+
+			this.stopGame = function() {
+				console.log("attempting to stop game");
+				console.log(this.gameInterval);
+				clearInterval(this.gameInterval);
+				console.log("attempt made");
+				console.log(this.gameInterval);
+			};
 
 			this.availableNumbers = this.getNumberPairs(this.bingoNumbers);
 			this.usedNumbers = [];
 			this.currentNumber = '';
+			this.gameInterval;
 
-			this.generateBingoCardNumbers = function() {
-				var shuffled = {
-					B: this.shuffle(this.bingoNumbers.B),
-					I: this.shuffle(this.bingoNumbers.I),
-					N: this.shuffle(this.bingoNumbers.N),
-					G: this.shuffle(this.bingoNumbers.G),
-					O: this.shuffle(this.bingoNumbers.O),
-				};
 
-				var cardNumbers = {
-					B: shuffled.B.slice(0,5),
-					I: shuffled.I.slice(0,5),
-					N: shuffled.N.slice(0,5),
-					G: shuffled.G.slice(0,5),
-					O: shuffled.O.slice(0,5)
-				};
-
-				cardNumbers.N[2] = "Free";
-				return cardNumbers;
-			};
-			
-
-			this.generateBingoCard = function(divID) {
-				var numbers = this.generateBingoCardNumbers();
-				var generatedHTML;
-				for ( var i = 0; i < 5; i++ ) {
-					generatedHTML += "<tr>";
-					generatedHTML += "<td>" + numbers.B[i] + "</td>"
-					generatedHTML += "<td>" + numbers.I[i] + "</td>"
-					generatedHTML += "<td>" + numbers.N[i] + "</td>"
-					generatedHTML += "<td>" + numbers.G[i] + "</td>"
-					generatedHTML += "<td>" + numbers.O[i] + "</td>"
-					generatedHTML += "</tr>"
-				}
-				$(divID).append(generatedHTML);
-
-			};
 	} // Bingo
 
 	var newGame = new Bingo();
-	for ( var cardNum = 1; cardNum < 4; cardNum++ ) {
-		newGame.generateBingoCard('#bingoCard' + cardNum);
-	};
+
 	
 
 
 	$('#nextNumber').on('click', function() {
-		if (newGame.usedNumbers.length > 0 ) {
-			newGame.highlightNumber(newGame.currentNumber);
-		}
-		var currentNumber = newGame.getNextNumber();
-		$('#currentNumber').text(currentNumber);
-		newGame.currentNumber = currentNumber;
+		console.log("starting game");
+		newGame.runGame();
 	});
 
+	$('#stopGame').on('click', function() {
+		console.log("stopping game");
+		newGame.stopGame();
+	});
+
+		console.log("loaded");
+	 
 	}); // document.ready
 }]); // BingoController
 
