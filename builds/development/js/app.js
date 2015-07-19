@@ -21,6 +21,9 @@ myApp.config(['$routeProvider', function($routeProvider) {
 
 var appControllers = angular.module('appControllers',[]);
 
+appControllers.controller('GameController', ['$scope', function($scope) {
+	// test controller
+}]);
 
 appControllers.controller('BingoController', ['$scope', function($scope){
 	angular.element(document).ready(function () {
