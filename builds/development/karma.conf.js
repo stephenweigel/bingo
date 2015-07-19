@@ -21,7 +21,7 @@ module.exports = function(config) {
       'vendor/angular/angular-animate.min.js',
       'vendor/jquery/jquery-2.1.4.min.js',
       'vendor/bootstrap/js/bootstrap.min.js',
-      'js/app.js',
+      'js/*.js', // if unexplained errors start happening, stop using wildcard
       'spec/*Spec.js'
     ],
 

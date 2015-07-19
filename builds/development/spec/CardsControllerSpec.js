@@ -1,4 +1,4 @@
-describe('GameController', function() {
+describe('CardsController', function() {
     beforeEach(module('myApp'));
 
     var $controller, $scope, controller;
@@ -10,12 +10,12 @@ describe('GameController', function() {
 
   beforeEach(function(){
     $scope = {};  
-    controller = $controller('GameController', { $scope: $scope });
+    controller = $controller('CardsController', { $scope: $scope });
   });
 
   it('should have bingo numbers', function() {
-    expect($scope.bingo).toBeTruthy();
-    expect($scope.bingo.bingoNumbers.B.length).toEqual(15);
+    expect($scope.cards).toBeTruthy();
+    expect($scope.cards.bingoNumbers.B.length).toEqual(15);
   });
 
 });
