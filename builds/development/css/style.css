@@ -15,3 +15,53 @@
 	font-size: 2em;
 	font-weight: bold;
 }
+
+.printOnly {
+	display: none;
+}
+
+@media print {
+  #nonPrintSection {
+    display: none;
+  }
+  #printSection {
+    display: block;
+    width: 100%;
+    margin: 0;
+    float: none;
+  }
+
+  #printSection .playerCard {
+  	margin: 0.2em 1em 0.2em;
+  	float: left;
+  	width: 25%;
+  	font-size: .8em;
+  	border: 2px #666 solid;
+  }
+
+  .printOnly {
+  	display: block;
+  	text-align: center;
+  }
+
+  .screenOnly {
+	display: none;	
+  }
+}
+
+
+/*@media print {
+  body * {
+    visibility: hidden;
+  }
+  #playerCardSection * {
+    visibility: visible;
+    margin-top: 4em;
+  }
+
+  #playerCardSection .playerCard {
+  	margin: 2em;
+  	float: left;
+  	width: 25%;
+  }
+}*/

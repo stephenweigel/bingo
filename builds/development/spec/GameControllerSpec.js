@@ -13,9 +13,9 @@ describe('GameController', function() {
     controller = $controller('GameController', { $scope: $scope });
   });
 
-  it('should have bingo numbers', function() {
-    expect($scope.bingo).toBeTruthy();
-    expect($scope.bingo.bingoNumbers.B.length).toEqual(15);
-  });
+  // it('should have bingo numbers', function() {
+  //   expect($scope.bingo).toBeTruthy();
+  //   expect($scope.bingo.bingoNumbers.B.length).toEqual(15);
+  // });
 
 });

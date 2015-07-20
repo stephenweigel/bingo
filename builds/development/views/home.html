@@ -1,8 +1,9 @@
  <div class="container">
-        <div class="row" id="scoreboardRow">
-            <div class="col-md-10 col-md-offset-1">  
-                <div class="col-md-8">
-                    <table class="table" id="bingoScoreboard">
+ 	<section id="nonPrintSection">
+	    <div class="row" id="scoreboardRow">
+	        <div class="col-md-10 col-md-offset-1">  
+	            <div class="col-md-8">
+	                <table class="table" id="bingoScoreboard">
 					    <tr>
 					        <td class="letterCell">B</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
 					        <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
@@ -25,20 +26,90 @@
 					    </tr>
 
 					</table>
-                </div>
+	                </div>
 
-                <div class="col-md-4 text-center" id="currentNumberDiv">
-                    <h2>Current Number</h2>
-                    <p id="currentNumber">Click Next Number to start the game!</p>
-                </div>
-                <div class="row">
-            <div id="nextNumberDiv" class="text-center">
-                <btn class="btn btn-primary" id="nextNumber">Start Game</btn>
-            </div>
-            <div id="nextNumberDiv" class="text-center">
-                <btn class="btn btn-primary" id="stopGame">Stop Game</btn>
-            </div>
-        </div>
-            </div>
-        </div>
-    </div>
+	                <div class="col-md-4 text-center" id="currentNumberDiv">
+	                    <h2>Current Number</h2>
+	                    <p id="currentNumber">Click Next Number to start the game!</p>
+	                </div>
+	                <div class="row">
+			            <div id="nextNumberDiv" class="text-center">
+			                <btn class="btn btn-primary" id="nextNumber" ng-click="bingo.runGame()">Start Game</btn>
+			            </div>
+			            <div id="nextNumberDiv" class="text-center">
+			                <btn class="btn btn-primary" id="stopGame" ng-click="bingo.stopGame()">Stop Game</btn>
+			            </div>
+			        </div>
+	        </div>
+	    </div><!-- row -->
+
+	    <div class="row">
+	    	<btn class="btn btn-primary" ng-click="toggleCards()">Show/Hide Cards</btn>
+	    	 </section>
+		    <section id="printSection">	
+	    	<div ng-show="showCards"><!-- View Cards -->
+	    		<h3 class="screenOnly">Player Cards</h3>
+		    	<div class="form-group screenOnly">
+		    		<label for="selectedPlayer">Choose a Player</label>
+		    		<select name="selectedPlayer" ng-model="selectedPlayer" ng-change="showPlayer()">
+		    			<option ng-repeat="player in players" value="{{player.id}}">{{player.name}}</option>
+			    	</select>
+		    	</div>
+		   
+	    	<div ng-show="selectedPlayer">
+	    		 <div class="row">
+	    		 	<h5 class="printOnly text-center">{{playerInfo.name}}</h5>
+	    		 	<div>
+		    		 	<div class='col-md-4' ng-repeat="card in playerInfo.cards">
+		    				<table class="table text-center playerCard">
+		    					<tr>
+		    						<th class="text-center">B</th>
+		    						<th class="text-center">I</th>
+		    						<th class="text-center">N</th>
+		    						<th class="text-center">G</th>
+		    						<th class="text-center">O</th>
+		    					</tr>
+		    					<tr>
+		    						<td>{{card.B[0]}}</td>
+		    						<td>{{card.I[0]}}</td>
+		    						<td>{{card.N[0]}}</td>
+		    						<td>{{card.G[0]}}</td>
+		    						<td>{{card.O[0]}}</td>
+		    					</tr>
+		    					<tr>
+		    						<td>{{card.B[1]}}</td>
+		    						<td>{{card.I[1]}}</td>
+		    						<td>{{card.N[1]}}</td>
+		    						<td>{{card.G[1]}}</td>
+		    						<td>{{card.O[1]}}</td>
+		    					</tr>
+		    					<tr>
+		    						<td>{{card.B[2]}}</td>
+		    						<td>{{card.I[2]}}</td>
+		    						<td>{{card.N[2]}}</td>
+		    						<td>{{card.G[2]}}</td>
+		    						<td>{{card.O[2]}}</td>
+		    					</tr>
+		    					<tr>
+		    						<td>{{card.B[3]}}</td>
+		    						<td>{{card.I[3]}}</td>
+		    						<td>{{card.N[3]}}</td>
+		    						<td>{{card.G[3]}}</td>
+		    						<td>{{card.O[3]}}</td>
+		    					</tr>
+		    					<tr>
+		    						<td>{{card.B[4]}}</td>
+		    						<td>{{card.I[4]}}</td>
+		    						<td>{{card.N[4]}}</td>
+		    						<td>{{card.G[4]}}</td>
+		    						<td>{{card.O[4]}}</td>
+		    					</tr>
+			    		 	</table>
+		    		 	</div>
+		    		 </div>
+	    		 </div>
+	    	</div>
+	    </section><!-- print section -->
+	    </div>
+    </div><!-- row -->
+</div>
