@@ -5,6 +5,16 @@ myApp.controller('GameController', ['$scope', function($scope) {
 	$scope.showCards = false;
 	$scope.bingoCard = new BingoCard();
 
+	$scope.setNumberOfPlayers = function() {
+		$scope.players = [];
+		for ( var x = 0; x < $scope.numOfPlayers; x++ ) {
+			$scope.players.push(new Player(x + 1));
+		}
+		console.log($scope.players);
+		$scope.distributeCards(); // remove later when there is game creation
+		console.log("cards distributed");
+	};
+
 	$scope.toggleCards = function() {
 		if ( $scope.showCards === false ) {
 			$scope.showCards = true;
@@ -38,6 +48,6 @@ myApp.controller('GameController', ['$scope', function($scope) {
 			}
 		}
 	};
-	$scope.distributeCards(); // remove later when there is game creation
+	
 
 }]);
