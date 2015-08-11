@@ -72,11 +72,47 @@ function Bingo() {
 		$(cell).css("background-color","green");
 	};
 
+	this.generateBingoCardNumbers = function() {
+		var shuffled = {
+			B: this.shuffle(this.bingoNumbers.B),
+			I: this.shuffle(this.bingoNumbers.I),
+			N: this.shuffle(this.bingoNumbers.N),
+			G: this.shuffle(this.bingoNumbers.G),
+			O: this.shuffle(this.bingoNumbers.O),
+		};
+
+		var cardNumbers = {
+			B: shuffled.B.slice(0,5),
+			I: shuffled.I.slice(0,5),
+			N: shuffled.N.slice(0,5),
+			G: shuffled.G.slice(0,5),
+			O: shuffled.O.slice(0,5)
+		};
+
+		cardNumbers.N[2] = "Free";
+		return cardNumbers;
+	};
+
+
 	// highlight the bingo card on squares that match the given value
 	this.highlightPlayerCard = function(val) {
 		$(".playerCard td").filter(function() { 
 			return $(this).text() == val; })
 		.css("background-color", "green");
+	};
+
+	// highlight free spaces on the bingo card
+	this.highlightFreeSpaces = function() {
+		this.highlightPlayerCard('Free');
+	};
+
+	// highlight the called numbers on a player's card
+	this.highlightCalledNumbers = function() {
+		var calledNumbers = this.usedNumbers;
+		for ( var x = 0; x < calledNumbers.length; x++ ) {
+			var num = calledNumbers[x].slice(1);
+			this.highlightPlayerCard(num);
+		}
 	};
 
 	this.runGame = function() {

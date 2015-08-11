@@ -6,7 +6,6 @@ myApp.controller('GameController', ['$scope', function($scope) {
 	$scope.cardsPerPlayer = 9;
 	$scope.showCards = false;
 	$scope.toggleCardsMessage = "Show Player Cards";
-	$scope.bingoCard = new BingoCard();
 	$scope.gameSpeed = $scope.bingo.gameSpeed;
 
 
@@ -40,42 +39,24 @@ myApp.controller('GameController', ['$scope', function($scope) {
 		}
 	};
 
-	// highlight the called numbers on a players card
-	// ** should probably be moved to the BingoCard object
-	$scope.highlightCalledNumbers = function() {
-		var calledNumbers = $scope.bingo.usedNumbers;
-		for ( var x = 0; x < calledNumbers.length; x++ ) {
-			var num = calledNumbers[x].slice(1);
-			$scope.bingo.highlightPlayerCard(num);
-		}
-	};
-
-	// highlight free spaces when checking a player's card
-	// ** should probably be moved to the BingoCard object
-	$scope.highlightFreeSpaces = function() {
-		$scope.bingo.highlightPlayerCard('Free');
-	};
-
-
 	// set the playerInfo binding to the selected player in order
 	//   to display the player's card and highlight the numbers
 	//   on the player's card that have been called
 	$scope.showPlayer = function() {
 		$scope.playerInfo = $scope.players[$scope.selectedPlayer - 1];
 		setTimeout( function() { 
-			$scope.highlightFreeSpaces();
-			$scope.highlightCalledNumbers();
+			$scope.bingo.highlightFreeSpaces();
+			$scope.bingo.highlightCalledNumbers();
 		}, 1000);
 	};
 
 	// assign bingo cards to each of the players
-	// ** should probably be moved to the BingoCard object
 	$scope.distributeCards = function() {		
 		// generate numbers and assign them to players
 		for ( var i = 0; i < $scope.players.length; i++ ) {
 			for ( var x = 0; x < $scope.cardsPerPlayer; x++) { 
 				$scope.players[i].cards
-					.push($scope.bingoCard.generateBingoCardNumbers());
+					.push($scope.bingo.generateBingoCardNumbers());
 			}
 		}
 	};
