@@ -1,6 +1,6 @@
 <div class="form-group screenOnly">
 	<label for="selectedPlayer">Choose a Player</label>
 	<select name="selectedPlayer" ng-model="selectedPlayer" ng-change="showPlayer()">
-		<option ng-repeat="player in players" value="{{player.id}}">{{player.name}}</option>
+		<option ng-repeat="player in bingo.players" value="{{player.id}}">{{player.name}}</option>
 	</select>
 </div>

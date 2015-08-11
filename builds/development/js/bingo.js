@@ -93,6 +93,14 @@ function Bingo() {
 		return cardNumbers;
 	};
 
+	// assign bingo cards to each of the players
+	this.distributeCards = function() {
+		for ( var i = 0; i < this.players.length; i++ ) {
+			for ( var x = 0; x < this.cardsPerPlayer; x++ ) {
+				this.players[i].cards.push(this.generateBingoCardNumbers());
+			}
+		}
+	};
 
 	// highlight the bingo card on squares that match the given value
 	this.highlightPlayerCard = function(val) {
@@ -112,6 +120,14 @@ function Bingo() {
 		for ( var x = 0; x < calledNumbers.length; x++ ) {
 			var num = calledNumbers[x].slice(1);
 			this.highlightPlayerCard(num);
+		}
+	};
+
+	// Players
+	this.setNumberOfPlayers = function(num) {
+		this.players = [];
+		for ( var x = 0; x < num; x++ ) {
+			this.players.push(new Player(x + 1));
 		}
 	};
 
@@ -147,4 +163,8 @@ function Bingo() {
 	this.currentNumber; // stores the current number being called
 	this.gameInterval; // stores the interval for calling new number
 	this.gameSpeed = 5000; // get new number every 5 seconds
+
+	// Players
+	this.players = [];
+	this.cardsPerPlayer = 9;
 } // Bingo
