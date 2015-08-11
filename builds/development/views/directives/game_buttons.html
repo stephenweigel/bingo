@@ -1,0 +1,13 @@
+
+<div ng-show="preGame">
+	<btn class="btn btn-primary btn-lg" ng-click="beginGame()">Begin</btn>
+</div>
+
+<div ng-hide="preGame">
+
+	<btn class="btn btn-primary" id="nextNumber" 
+		ng-click="resumeGame()" ng-hide="gameRunning">Resume</btn>
+
+	<btn class="btn btn-primary" id="stopGame" 
+		ng-click="pauseGame()" ng-show="gameRunning">Pause</btn>
+</div>

@@ -1,3 +1,31 @@
+html {
+  background-color: whitesmoke  ;
+}
+
+/* Game Styles */
+#nextNumber, #stopGame {
+  font-family: 'Overlock', cursive;
+  font-size: 1.4em;
+}
+
+#nextNumber {
+  background-color: green;
+  border-color: rgb(1, 139, 1);
+  font-family: 'Overlock', cursive;
+  font-size: 1.4em;
+}
+
+#stopGame {
+  background-color: red;
+  border-color: rgb(245, 2, 2);
+  margin-left: 1em;
+}
+
+#cardsToggleDiv {
+  margin-top: 2em;
+}
+
+
 /* Scoreboard Styles */
 
 #bingoScoreboard {
@@ -5,6 +33,7 @@
   color: white;
   font-size: 1.5em;
   text-align: center;
+  margin-top: 2em;
 }
 
 .letterCell {
@@ -13,7 +42,16 @@
 
 #currentNumber {
 	font-size: 2em;
-	font-weight: bold;
+  font-weight: bold;
+  background-color: rgb(223, 223, 223);
+  color: green;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  padding-top: .6em;
+  margin: 1em auto;
+  border: 2px solid green;
 }
 
 .printOnly {

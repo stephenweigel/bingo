@@ -1,0 +1,11 @@
+<h3 ng-show="preGame">
+	please select the number of players and click Begin to start the game
+</h3>
+
+<p id="currentNumber" ng-hide="preGame">...</p>
+
+<game-speed ng-hide="preGame"></game-speed>
+
+<div class="row" ng-show="preGame">
+	<number-of-players></number-of-players>
+</div>

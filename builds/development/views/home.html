@@ -1,130 +1,32 @@
  <div class="container">
  	<section id="nonPrintSection">
+
 	    <div class="row" id="scoreboardRow">
-	        <div class="col-md-10 col-md-offset-1">  
-	            <div class="col-md-8">
-	                <table class="table" id="bingoScoreboard">
-					    <tr>
-					        <td class="letterCell">B</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-					        <td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
-					    </tr>
-					    <tr>
-					        <td class="letterCell">I</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td>
-					        <td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td>
-					    </tr>
-					    <tr>
-					        <td class="letterCell">N</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td>
-					        <td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td>
-					    </tr>
-					    <tr>
-					        <td class="letterCell">G</td><td>46</td><td>47</td><td>48</td><td>49</td><td>50</td><td>51</td><td>52</td><td>53</td><td>54</td>
-					        <td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>60</td>
-					    </tr>
-					    <tr>
-					        <td class="letterCell">O</td><td>61</td><td>62</td><td>63</td><td>64</td><td>65</td><td>66</td><td>67</td><td>68</td><td>69</td>
-					        <td>70</td><td>71</td><td>72</td><td>73</td><td>74</td><td>75</td>
-					    </tr>
-
-					</table>
-					<div><!-- number of players selection -->
-						<label for="numOfPlayers">Number of Players: </label>
-						<select name="numOfPlayers" ng-model="numOfPlayers" ng-change="setNumberOfPlayers()">
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-
-					</div>
-	                </div>
-
-	                <div class="col-md-4 text-center" id="currentNumberDiv">
-	                    <h2>Current Number</h2>
-	                    <p id="currentNumber">Click Next Number to start the game!</p>
-	                </div>
-	                <div class="row">
-			            <div id="nextNumberDiv" class="text-center">
-			                <btn class="btn btn-primary" id="nextNumber" ng-click="bingo.runGame()">Start Game</btn>
-			            </div>
-			            <div id="nextNumberDiv" class="text-center">
-			                <btn class="btn btn-primary" id="stopGame" ng-click="bingo.stopGame()">Stop Game</btn>
-			            </div>
-			        </div>
-	        </div>
-	    </div><!-- row -->
+	    	 <bingo-scoreboard class="col-md-8 col-md-offset-2"></bingo-scoreboard>
+	    </div><!-- row -->  
 
 	    <div class="row">
-	    	<btn class="btn btn-primary" ng-click="toggleCards()">Show/Hide Cards</btn>
-	    	 </section>
-		    <section id="printSection">	
-	    	<div ng-show="showCards"><!-- View Cards -->
-	    		<h3 class="screenOnly">Player Cards</h3>
-		    	<div class="form-group screenOnly">
-		    		<label for="selectedPlayer">Choose a Player</label>
-		    		<select name="selectedPlayer" ng-model="selectedPlayer" ng-change="showPlayer()">
-		    			<option ng-repeat="player in players" value="{{player.id}}">{{player.name}}</option>
-			    	</select>
-		    	</div>
+	    	 <game-status class="col-md-4 col-md-offset-4 text-center"></game-status>
+	    </div>	
+
+	    <div class="row">
+	     	<game-buttons class="col-md-4 col-md-offset-4 text-center"></game-buttons>
+	 	</div>
+
+	 	<div class="row text-center" id="cardsToggleDiv">
+	     	<btn class="btn btn-primary text-center" 
+	     		ng-click="toggleCards()" ng-show="players.length">{{toggleCardsMessage}}</btn>
+	 	</div>
+	</section><!-- nonPrintSection -->
+
+
+    <section id="printSection">	
+		<div ng-show="showCards"><!-- View Cards -->
+			<h3 class="screenOnly">Player Cards</h3>
+	    	<player-selection></player-selection>
 		   
-	    	<div ng-show="selectedPlayer">
-	    		 <div class="row">
-	    		 	<h5 class="printOnly text-center">{{playerInfo.name}}</h5>
-	    		 	<div>
-		    		 	<div class='col-md-4' ng-repeat="card in playerInfo.cards">
-		    				<table class="table text-center playerCard">
-		    					<tr>
-		    						<th class="text-center">B</th>
-		    						<th class="text-center">I</th>
-		    						<th class="text-center">N</th>
-		    						<th class="text-center">G</th>
-		    						<th class="text-center">O</th>
-		    					</tr>
-		    					<tr>
-		    						<td>{{card.B[0]}}</td>
-		    						<td>{{card.I[0]}}</td>
-		    						<td>{{card.N[0]}}</td>
-		    						<td>{{card.G[0]}}</td>
-		    						<td>{{card.O[0]}}</td>
-		    					</tr>
-		    					<tr>
-		    						<td>{{card.B[1]}}</td>
-		    						<td>{{card.I[1]}}</td>
-		    						<td>{{card.N[1]}}</td>
-		    						<td>{{card.G[1]}}</td>
-		    						<td>{{card.O[1]}}</td>
-		    					</tr>
-		    					<tr>
-		    						<td>{{card.B[2]}}</td>
-		    						<td>{{card.I[2]}}</td>
-		    						<td>{{card.N[2]}}</td>
-		    						<td>{{card.G[2]}}</td>
-		    						<td>{{card.O[2]}}</td>
-		    					</tr>
-		    					<tr>
-		    						<td>{{card.B[3]}}</td>
-		    						<td>{{card.I[3]}}</td>
-		    						<td>{{card.N[3]}}</td>
-		    						<td>{{card.G[3]}}</td>
-		    						<td>{{card.O[3]}}</td>
-		    					</tr>
-		    					<tr>
-		    						<td>{{card.B[4]}}</td>
-		    						<td>{{card.I[4]}}</td>
-		    						<td>{{card.N[4]}}</td>
-		    						<td>{{card.G[4]}}</td>
-		    						<td>{{card.O[4]}}</td>
-		    					</tr>
-			    		 	</table>
-		    		 	</div>
-		    		 </div>
-	    		 </div>
-	    	</div>
-	    </section><!-- print section -->
-	    </div>
-    </div><!-- row -->
+    	<div ng-show="selectedPlayer">
+    		<player-cards></player-cards>
+    	</div>  
+    </section><!-- print section -->
 </div>

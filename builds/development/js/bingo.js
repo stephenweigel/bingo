@@ -26,6 +26,7 @@ function Bingo() {
 		return numbers;
 	};
 
+	// get the next number to be called
 	this.getNextNumber = function() {
 		// shuffle available numbers
 		var shuffledNumbers = this.shuffle(this.availableNumbers);
@@ -41,6 +42,8 @@ function Bingo() {
 
 		return nextNumber;
 	};
+
+	// use to randomize the numbers called
 	this.shuffle = function (array) {
 	  var currentIndex = array.length, temporaryValue, randomIndex ;
 
@@ -60,6 +63,7 @@ function Bingo() {
 	  return array;
 	};
 
+	// highlight the given number on the scoreboard
 	this.highlightNumber = function(number) {
 		var num = number.slice(1);
 		var cell = $("#bingoScoreboard td").filter(function() {
@@ -68,22 +72,23 @@ function Bingo() {
 		$(cell).css("background-color","green");
 	};
 
-	this.highlightPlayerCard = function(num) {
-		console.log("about to highlight the card");
-		console.log("the number: " + num);
-		console.log("the selection: ");
-		console.log($(".playerCard td") );
-		console.log("the filter: ");
-		console.log($(".playerCard td").filter(function() { 
-			return $(this).text() == Number(num); }));
+	// highlight the bingo card on squares that match the given value
+	this.highlightPlayerCard = function(val) {
 		$(".playerCard td").filter(function() { 
-			return $(this).text() == Number(num); })
+			return $(this).text() == val; })
 		.css("background-color", "green");
-		console.log("it should have worked");
 	};
 
 	this.runGame = function() {
 		var currGame = this;
+
+		// get first number if at the start of a game
+		if ( currGame.usedNumbers.length == 0 ) {
+			var firstNumber = currGame.getNextNumber();
+			$('#currentNumber').text(firstNumber);
+			currGame.currentNumber = firstNumber;
+		}
+		// get next number every 5 seconds
 		currGame.gameInterval = setInterval(function () {
 	        if (currGame.usedNumbers.length > 0 ) {
 				currGame.highlightNumber(currGame.currentNumber, "#bingoScoreboard");
@@ -91,15 +96,19 @@ function Bingo() {
 			var currentNumber = currGame.getNextNumber();
 			$('#currentNumber').text(currentNumber);
 			currGame.currentNumber = currentNumber;
-	    },5000);
+	    },currGame.gameSpeed);
 	};
 
+	// stop calling numbers
 	this.stopGame = function() {
 		clearInterval(this.gameInterval);
 	};
 
-	this.availableNumbers = this.getNumberPairs(this.bingoNumbers);
-	this.usedNumbers = [];
-	this.currentNumber = '';
-	this.gameInterval;
+	// stores the numbers that have not been called yet
+	this.availableNumbers = this.getNumberPairs(this.bingoNumbers); 
+
+	this.usedNumbers = []; // stores the numbers that have already been called
+	this.currentNumber; // stores the current number being called
+	this.gameInterval; // stores the interval for calling new number
+	this.gameSpeed = 5000; // get new number every 5 seconds
 } // Bingo

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute']);
+var myApp = angular.module('myApp', ['ngRoute', 'myApp.directives']);
 
 // Routes
 
@@ -8,17 +8,7 @@ myApp.config(['$routeProvider', function($routeProvider) {
 			templateUrl: 'views/home.html',
 			controller: 'GameController'
 		}).
-		when('/cards', {
-			templateUrl: 'views/cards.html',
-			controller: 'CardsController'
-		}).
 		otherwise({
 			redirectTo: '/home'
 		});
 }]);
-
-// Controllers
-
-angular.module('appControllers',[]);
-
-
